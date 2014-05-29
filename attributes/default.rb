@@ -1,4 +1,4 @@
-default[:selenium][:java_package] = "java-1.7.0-openjdk"
+default[:selenium][:java_package] = "openjdk-7-jdk"
 default[:selenium][:jar] = "selenium-server-standalone-2.33.0.jar"
 default[:selenium][:install_to] = "/usr/local/libexec"
 default[:selenium][:prog_path] = "/usr/local/libexec/selenium-server-standalone.jar"

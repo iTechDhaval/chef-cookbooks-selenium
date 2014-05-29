@@ -7,7 +7,6 @@
 #
 package node[:selenium][:java_package] do
   action :install
-  not_if "rpm -q #{node[:selenium][:java_package]}"
 end
 
 # selenium server
@@ -43,11 +42,15 @@ template "/etc/logrotate.d/selenium" do
   mode "0644"
 end
 
-# xorg-x11-server-Xvfb
-package "xorg-x11-server-Xvfb" do
-  action :install
-  not_if "rpm -q xorg-x11-server-Xvfb"
+# xorg
+list = case node.platform
+when "ubuntu" then
+  %w(xserver-xorg-core xvfb)
+when "centos" then
+  %w(xorg-x11-server-Xvfb mesa-libGL)
 end
+
+list.each { |pkg| package(pkg) { action :install } }
 
 template "/etc/init.d/xvfb" do
   source "init.d/xvfb.erb"
@@ -67,9 +70,12 @@ template "/etc/logrotate.d/xvfb" do
   mode "0644"
 end
 
+service "xvfb" do
+  action [:enable, :start]
+end
+
 # browser firefox
 package "firefox" do
   action :install
-  not_if "rpm -q firefox"
 end
 
