@@ -74,8 +74,13 @@ service "xvfb" do
   action [:enable, :start]
 end
 
+service "selenium" do
+  action [:enable, :start]
+end
+
 # browser firefox
 package "firefox" do
   action :install
+  options ("--force-yes")
 end
 

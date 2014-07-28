@@ -1,4 +1,4 @@
-name		 "selenium"
+name             "selenium"
 maintainer       "Dhaval Patel"
 maintainer_email "tech.dhaval@gmail.com"
 license          "Apache 2.0"
